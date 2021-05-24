@@ -6,26 +6,30 @@ import datetime
 ser = serial.Serial("COM3", "9600")
 
 def tijd_regime(event, window, number):
-    if event == "Licht uit":
+    if event == "24u donker":
         ser.write(bytes((f"{number}1"), 'utf-8'))
         window.close()
 
-    if event == "Licht aan":
+    if event == "24u licht":
         ser.write(bytes((f"{number}2"), 'utf-8'))
         window.close()
         
 
-    if event == "Flikker(500ms)":
+    if event == "Alternerend(3ms)":
         ser.write(bytes((f"{number}3"), 'utf-8'))
         window.close()
+    #if event == "12u licht/12u donker":
+    #   ser.write(bytes((f"{number}4"), 'utf-8'))
+    #   window.close()
         
 
 
 def strobo_window(strobo_num, real_num):
     layout = [[sg.Text(f"Stroboscoop_{strobo_num}",font=("Helvetica", 15))],
-            [sg.Button("Licht aan",bind_return_key=True,)],
-            [sg.Button("Licht uit", bind_return_key=True)],
-            [sg.Button("Flikker(500ms)", bind_return_key=True)]]
+            [sg.Button("24u licht",bind_return_key=True,)],
+            [sg.Button("24u donker", bind_return_key=True)],
+            [sg.Button("Alternerend(3ms)", bind_return_key=True)]]
+            #[sg.Button("12u licht/12u donker", bind_return_key=True)]]
     
     window2 = sg.Window("Second Window", layout, size=(200,200))
     while True:

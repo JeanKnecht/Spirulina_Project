@@ -5,7 +5,7 @@ int ledState = LOW;
 unsigned long previousMillis = 0;
 
 
-const long interval = 500;
+const long interval = 100;
 
 int timeState_2 = LOW;
 int timeState_3 = LOW;
