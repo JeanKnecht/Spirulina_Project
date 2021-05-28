@@ -1,3 +1,9 @@
+/*
+  SpirulinaBox
+
+  By Jean Knecht
+  Sint Barbara college Steam project
+*/
 int readl;
 
 int ledState = LOW;
