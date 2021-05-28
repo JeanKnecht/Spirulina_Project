@@ -5,8 +5,9 @@
   Sint Barbara college Steam project
 */
 int readl;
-
+int temp= A0;
 int ledState = LOW;
+int warmte = 8;
 
 unsigned long previousMillis = 0;
 
@@ -65,12 +66,13 @@ void setup() {
   pinMode(5, OUTPUT);
   pinMode(6, OUTPUT);
   pinMode(7, OUTPUT);
-  pinMode(8, OUTPUT);
   pinMode(9, OUTPUT);
   pinMode(10, OUTPUT);
   pinMode(11, OUTPUT);
   pinMode(12, OUTPUT);
   pinMode(13, OUTPUT);
+  pinMode(warmte, OUTPUT);
+  pinMode(temp, INPUT);
 }
 
 void loop() {
@@ -121,4 +123,18 @@ void loop() {
         changeTimeH(soort_strobo);
 }
 }
+
+
+  int reading = analogRead(temp);
+  float voltage = reading * 5.0;
+  voltage /= 1024.0;
+  float temperatureC = (voltage - 0.5) * 100 ;
+
+
+  if(temperatureC < 32){
+    digitalWrite(warmte, HIGH);
+    }
+  else{
+    digitalWrite(warmte, LOW);
+    }
 }
