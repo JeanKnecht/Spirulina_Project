@@ -4,11 +4,33 @@
   By Jean Knecht
   Sint Barbara college Steam project
 */
-int readl;
+
+
+#include <Keypad.h>
+
+const int ROW_NUM = 4; //four rows
+const int COLUMN_NUM = 3; //four columns
+
+char keys[ROW_NUM][COLUMN_NUM] = {
+  {'1','2','3'},
+  {'4','5','6'},
+  {'7','8','9'},
+  {'*','0','#'}
+};
+
+byte pin_rows[ROW_NUM] = {13, 12, 11, 10}; //connect to the row pinouts of the keypad
+byte pin_column[COLUMN_NUM] = {9, 8, 7}; //connect to the column pinouts of the keypad
+
+Keypad keypad = Keypad( makeKeymap(keys), pin_rows, pin_column, ROW_NUM, COLUMN_NUM );
+
+String inputString;
+long inputInt;
+
+int pressState = LOW;
 int temp= A0;
 int ledState = LOW;
 int warmte = 8;
-
+int readl;
 unsigned long previousMillis = 0;
 
 
@@ -18,8 +40,6 @@ int timeState_2 = LOW;
 int timeState_3 = LOW;
 int timeState_4 = LOW;
 int timeState_5 = LOW;
-int timeState_6 = LOW;
-int timeState_7 = LOW;
 
 void aan(int trigger){
   digitalWrite(trigger, HIGH);
@@ -39,8 +59,6 @@ void changeTimeH(int x){
      case 3: timeState_3 = HIGH; break;
      case 4: timeState_4 = HIGH; break;
      case 5: timeState_5 = HIGH; break;
-     case 6: timeState_6 = HIGH; break;
-     case 7: timeState_7 = HIGH; break;
      default:break;
    }
 }
@@ -51,8 +69,6 @@ void changeTimeL(int x){
      case 3: timeState_3 = LOW; break;
      case 4: timeState_4 = LOW; break;
      case 5: timeState_5 = LOW; break;
-     case 6: timeState_6 = LOW; break;
-     case 7: timeState_7 = LOW; break;
      default:break;
    }
 }
@@ -64,18 +80,34 @@ void setup() {
   pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
-  pinMode(6, OUTPUT);
-  pinMode(7, OUTPUT);
-  pinMode(9, OUTPUT);
-  pinMode(10, OUTPUT);
-  pinMode(11, OUTPUT);
-  pinMode(12, OUTPUT);
-  pinMode(13, OUTPUT);
+
   pinMode(warmte, OUTPUT);
   pinMode(temp, INPUT);
 }
 
 void loop() {
+  char key = keypad.getKey();
+
+  if (key) {
+    Serial.println(key);
+
+    if (key >= '0' && key <= '9') {     
+      inputString += key;               
+    } else if (key == '#') {
+      if (inputString.length() > 0) {
+        inputInt = inputString.toInt();
+        inputString = "";
+        readl = inputInt;
+        Serial.println(readl);
+        pressState = HIGH;
+        inputInt = "";
+
+        
+      }
+    } else if (key == '*') {
+      inputString = "";                 
+    }
+  }
 
   if(timeState_2 == HIGH){
       digitalWrite(2, ledState);}
@@ -85,10 +117,6 @@ void loop() {
      digitalWrite(4, ledState);}
   if(timeState_5 == HIGH){
      digitalWrite(5, ledState);}
-  if(timeState_6 == HIGH){
-     digitalWrite(6, ledState);}
-  if(timeState_7 == HIGH){
-     digitalWrite(7, ledState);}
 
   unsigned long currentMillis = millis();
         
@@ -104,23 +132,25 @@ void loop() {
       
   }
 
-  if(Serial.available()>0){
-      readl = Serial.parseInt();
+  if(pressState == HIGH){
       int soort_strobo = readl / 10;
       int soort_tijd = readl % 10;
 
       if(soort_tijd == 1){
        changeTimeL(soort_strobo);
        uit(soort_strobo);
+       pressState = LOW;
         }
 
       if(soort_tijd == 2){
         changeTimeL(soort_strobo);
         aan(soort_strobo);
+        pressState = LOW;
         }
 
       if(soort_tijd == 3){
         changeTimeH(soort_strobo);
+        pressState = LOW;
 }
 }
 
