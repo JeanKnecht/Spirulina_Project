@@ -10,6 +10,6 @@ code om de klimaaatbox op de juiste temperatuur te houden, om beluchting te rege
   - Afsluiten doe je met de hashtag
 ## circuit
 
-![Image of Yaktocat](https://octodex.github.com/images/yaktocat.png)
+![Image of Yaktocat](https://github.com/JeanKnecht/Spirulina_Project\circuit.jpg)
 
   
