@@ -3,6 +3,9 @@
 
   By Jean Knecht
   Sint Barbara college Steam project
+
+  code dat gebruikt wordt om de klimaatbox op de juiste temperatuur te houden(warmte element en temperatuursensor),
+  om de beluchting te regelen(12v computer ventilator) en om de stroboscopen mee te bedienen aan de hand van een 3x3 numpad.
 */
 
 
@@ -24,16 +27,17 @@ byte pin_column[COLUMN_NUM] = {9, 8, 7};
 Keypad keypad = Keypad( makeKeymap(keys), pin_rows, pin_column, ROW_NUM, COLUMN_NUM );  //functie van de library om keypad te maken
 
 //nu begint het echt werk
+//meeste variabelen worden uitgelegd in de code zelf
 
-String inputString; //variabel waarin de input van de numpad in worden bewaard
-long inputInt;  //variabel waarin de input van de numpad(in string vorm maar wel numeriek) wordt omgezet naar een integer
+String inputString;
+long inputInt;
 
-int pressState = LOW; //state dat wordt gebruikt om aan te geven wanneer de code op de numpad is doorgestuurd
+int pressState = LOW; 
 int temp= A0; //analog pin voor de temperatuursensor
-int ledState = LOW; //state dat wordt gebruikt voor wanneer er gebruik wordt gemaakt van het alternerend licht
+int ledState = LOW; 
 int warmte = 8; //pin om mosfet van het warmte element mee te besturen
-int readl;  //variabel waarin het integer van de numpad in bewaard wordt
-unsigned long previousMillis = 0; //variabel dat gebruikt wordt om delay te omzeilen
+int readl;  
+unsigned long previousMillis = 0; 
 
 
 const long interval = 100; //interval van het alternerend licht
@@ -43,7 +47,7 @@ int timeState_3 = LOW;
 int timeState_4 = LOW;
 int timeState_5 = LOW;
 
-void aan(int trigger){
+void aan(int trigger){                        //3 functies voor telkens 1 tijdsregime(aan, uit en alternerend)
   digitalWrite(trigger, HIGH);
 }
 
