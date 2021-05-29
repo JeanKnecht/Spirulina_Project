@@ -6,37 +6,39 @@
 */
 
 
-#include <Keypad.h>
+#include <Keypad.h> //library om numpad mee te kunnen besturen                                      
 
-const int ROW_NUM = 4; //four rows
-const int COLUMN_NUM = 3; //four columns
+const int ROW_NUM = 4;  // numpad bevat 4 rijen
+const int COLUMN_NUM = 3; // numpad bevat 4 kolommen maar voor ons zijn enkel de eerste 3 nodig
 
-char keys[ROW_NUM][COLUMN_NUM] = {
+char keys[ROW_NUM][COLUMN_NUM] = { //visualisatie van het numpad(is nodig voor de library...)
   {'1','2','3'},
   {'4','5','6'},
   {'7','8','9'},
   {'*','0','#'}
 };
 
-byte pin_rows[ROW_NUM] = {13, 12, 11, 10}; //connect to the row pinouts of the keypad
-byte pin_column[COLUMN_NUM] = {9, 8, 7}; //connect to the column pinouts of the keypad
+byte pin_rows[ROW_NUM] = {13, 12, 11, 10};  //digital pins die overeenkomen met de pins van de numpad
+byte pin_column[COLUMN_NUM] = {9, 8, 7};   
 
-Keypad keypad = Keypad( makeKeymap(keys), pin_rows, pin_column, ROW_NUM, COLUMN_NUM );
+Keypad keypad = Keypad( makeKeymap(keys), pin_rows, pin_column, ROW_NUM, COLUMN_NUM );  //functie van de library om keypad te maken
 
-String inputString;
-long inputInt;
+//nu begint het echt werk
 
-int pressState = LOW;
-int temp= A0;
-int ledState = LOW;
-int warmte = 8;
-int readl;
-unsigned long previousMillis = 0;
+String inputString; //variabel waarin de input van de numpad in worden bewaard
+long inputInt;  //variabel waarin de input van de numpad(in string vorm maar wel numeriek) wordt omgezet naar een integer
+
+int pressState = LOW; //state dat wordt gebruikt om aan te geven wanneer de code op de numpad is doorgestuurd
+int temp= A0; //analog pin voor de temperatuursensor
+int ledState = LOW; //state dat wordt gebruikt voor wanneer er gebruik wordt gemaakt van het alternerend licht
+int warmte = 8; //pin om mosfet van het warmte element mee te besturen
+int readl;  //variabel waarin het integer van de numpad in bewaard wordt
+unsigned long previousMillis = 0; //variabel dat gebruikt wordt om delay te omzeilen
 
 
-const long interval = 100;
+const long interval = 100; //interval van het alternerend licht
 
-int timeState_2 = LOW;
+int timeState_2 = LOW;  
 int timeState_3 = LOW;
 int timeState_4 = LOW;
 int timeState_5 = LOW;
