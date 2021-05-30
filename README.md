@@ -10,6 +10,6 @@ code om de klimaaatbox op de juiste temperatuur te houden, om beluchting te rege
   - Afsluiten doe je met de hashtag
 ## circuit
 
-![Image of Circuit](circuit.jpg)
+![Image of Circuit](Images/Schematic_SpirulinaBox_2021-05-30.png)
 
   
