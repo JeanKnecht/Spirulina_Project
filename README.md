@@ -33,6 +33,6 @@ Het verwarmingselement gaat automatisch aan of uit (hangt af van de input van de
 De stroboscopen kunnen manueel worden bediend met de numpad.
 
 ## Code
-(hier worden alleen de belangrijkste stukjes code beschreven, bij de code zelf staat er meer informatie)
+(lees eerst de commentaren bij de code vooraleer je hieraan begint)
 
   
