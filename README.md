@@ -32,6 +32,7 @@ Op deze manier kunnen we de stroboscoop en het verwarmingselement aan en uit doe
 Het verwarmingselement gaat automatisch aan of uit (hangt af van de input van de temperatuursensor).
 De stroboscopen kunnen manueel worden bediend met de numpad.
 
-##Code (hier worden alleen de belangrijkste stukjes code beschreven, bij de code zelf staat er meer informatie)
+## Code
+(hier worden alleen de belangrijkste stukjes code beschreven, bij de code zelf staat er meer informatie)
 
   
