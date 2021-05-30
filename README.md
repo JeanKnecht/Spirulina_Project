@@ -25,7 +25,7 @@ Het verwarmingselement krijgt 20V en heeft dus geen weerstand nodig.
 
 De stroboscopen en het verwarmingselement worden bediend door een mosfet in serie te plaatsen en de gate te verbinden met de Digital pins op de Arduino UNO.
 
-Wanneer er 5 volt via de arduino naar de mosfet wordt gestuurd onstaat er een elektrisch veld in de mosfet dat er voor zorgt dat elektronen naar de GND kunnen lopen en zo het circuit kunnen sluiten.
+Wanneer er 5 volt via de arduino naar de mosfet wordt gestuurd onstaat er een elektrisch veld in de mosfet dat er voor zorgt dat elektronen via het mosfet naar de GND kunnen lopen en zo het circuit kunnen sluiten.
 
 Op deze manier kunnen we de stroboscoop en het verwarmingselement aan en uit doen wanneer wij willen.
 
@@ -35,4 +35,33 @@ De stroboscopen kunnen manueel worden bediend met de numpad.
 ## Code
 (lees eerst de commentaren bij de code vooraleer je hieraan begint)
 
+1) ### delay
+
+```arduino
+unsigned long previousMillis = 0;
+const long interval = 100;
+
+void loop() {
+unsigned long currentMillis = millis();
+
+if (currentMillis - previousMillis >= interval) {
+        previousMillis = currentMillis;
+
+        if (ledState == LOW){
+         ledState = HIGH;}
+        else{
+          ledState = LOW;
+          }
+
+      
+  }
   
+}
+```
+Omdat er verschillende tijdsregimes nodig zijn en omdat terwijl het programma loopt er verschillende meetingen moeten gebeuren is het gebruiken van een delay onmogelijk.
+
+Om dit te omzeilen wordt de interne klok van de arduino gebruikt die meet hoelang het programma al bezig is (in ms).
+
+Eerst worden er 2 variablen gemaakt: previousMillis en interval.
+- Interval: variabel dat bijhoudt hoeveel ms er moeten gepasseerd zijn opdat de if-statement True is. Dit is ook gelijk aan het interval van de stroboscopen.
+
