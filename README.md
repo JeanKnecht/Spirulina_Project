@@ -4,12 +4,10 @@
 
 Deze code bestuurt een klimaatbox dat wordt gebruikt voor het groeien van Spirulina. Temperatuur en beluchting gebeuren automatisch en de stroboscopen worden bediend aan de hand van een 4x3 numpad.
 
-<<<<<<< HEAD
+
 ## Technisch circuit
-![Image of Circuit](circuit.jpg)
-=======
 ![Image of Circuit](Images/Schematic_SpirulinaBox_2021-05-30.png)
->>>>>>> 2bf45f98b1d5a8d976385f7caa453a897d0676e7
+
 
 Materialen
   - 4 x 10W stroboscopen
