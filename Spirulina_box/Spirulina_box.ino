@@ -11,7 +11,7 @@
 
 #include <Keypad.h> //library om numpad mee te kunnen besturen                                      
 
-const byte ROWS = 4;                    // hier volgen enkle settings die noodzakelijk zijn voor de library
+const byte ROWS = 4;                    // hier volgen enkele settings die noodzakelijk zijn voor de library van de numpad
 const byte COLS = 3; 
 
 char hexaKeys[ROWS][COLS] = {
@@ -103,9 +103,9 @@ void loop() {
       if (inputString.length() > 0) {   //er moet zeker meer dan 1 keer gedrukt zijn anders is er geen input
         inputInt = inputString.toInt();
         inputString = "";               //de inputString wordt weer leeggehaald, nu kan die weer nieuwe informatie opslaan
-        readl = inputInt;               //het bekomen integer wordt opgeslaan in een variabel dat later gebruikt wordt om de gegevens op te vragen
+        readl = inputInt;               //het bekomen integer wordt opgeslaan in een variabel dat later gebruikt wordt om de de mosfets te reguleren
         Serial.println(readl);
-        pressState = HIGH;              //wanneer er gedrukt is en er een getal is opgeslagen in een variabel wordt deze statement True
+        pressState = HIGH;              //wanneer er gedrukt is en er een getal is opgeslagen in een variabel wordt deze statement True, dit manipuleert de code die verder wordt beschreven
         inputInt;
 
         
@@ -144,7 +144,7 @@ void loop() {
 
       if(soort_tijd == 1){                        //er wordt gekeken welk tijdsregime er gevraagd wordt
        changeTimeL(soort_strobo);                 
-       uit(soort_strobo);                         //verwezen naar een functie die de led zal uitzetten, de functie vraagt naar welke digitale pin verwezen moet worden
+       uit(soort_strobo);                         //verwezen naar een functie die de led zal uitzetten, de functie vraagt naar welke digitale pin verwezen moet worden(omdat er geen variabel is toegekend kan "soort_strobo" direct verwijzen naar een digital pin. 
        pressState = LOW;                          //de actie is ondergaan en de pressState mag weer op low gezet worden totdat er een nieuwe variabel op de numpad wordt ingetoetst
         }
 
