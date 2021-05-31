@@ -52,7 +52,8 @@ De peltier module verwarmt de koelplaat, wanneer lucht wordt aangetrokken door d
 ## Code
 (lees eerst de commentaren bij de code vooraleer je hieraan begint)
 
-1) ### delay
+### delay
+omdat het programma verschillende tijdsregimes bevat en omdat het constant input moet kunnen lezen is het gebruik van delay onmogelijk. Er is dus een andere manier nodig om dit op te lossen.
 
 ```arduino
 unsigned long previousMillis = 0;
@@ -75,10 +76,16 @@ if (currentMillis - previousMillis >= interval) {
   
 }
 ```
-Omdat er verschillende tijdsregimes nodig zijn en omdat terwijl het programma loopt er verschillende meetingen moeten gebeuren is het gebruiken van een delay onmogelijk.
-
-Om dit te omzeilen wordt de interne klok van de arduino gebruikt die meet hoelang het programma al bezig is (in ms).
+Om de delay te omzeilen wordt de interne klok van de arduino gebruikt die meet hoelang het programma al bezig is (in ms).
 
 Eerst worden er 2 variablen gemaakt: previousMillis en interval.
 - Interval: variabel dat bijhoudt hoeveel ms er moeten gepasseerd zijn opdat de if-statement True is. Dit is ook gelijk aan het interval van de stroboscopen.
 
+- previousMillis: variabel dat gerbuikt wordt om wanneer het interval is beschreden, de tijd op een soort van manier te resetten. Natuurlijk gebeurt dit resetten niet echt maar relatief gezien kunnen we het wel zo gebruiken.
+
+Na het interval wordt de currentMillis gelijk gesteld aan de previousMillis, op deze manier reset je de klok.
+Bijvoorbeeld:
+
+op tijdstip t = 100ms is het interval beschreden, previousMillis wordt gelijk gesteld aan 100ms. Wanneer t = 200ms is 200ms - previousMillis opnieuw 100ms. Het interval is opnieuw beschreden.
+
+Vervolgens wordt de ledstate oftewel HIGH of LOW gezet (tegenovergesteld van vorige) en krijgen de stroboscopen zo afwisselend 5v en 0v.
