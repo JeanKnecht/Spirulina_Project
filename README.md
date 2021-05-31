@@ -18,7 +18,7 @@ Materialen
   - TMP36
   - Arduino UNO
 
-De stroboscoop, ventilator en verwarmingselement zijn parallel geschakelt. Er wordt 12 volt DC toegediend, dit is genoeg om alle aparatuur te laten draaien.
+De stroboscoop, ventilator en verwarmingselement zijn parallel geschakelt. Er wordt 12 volt DC toegediend, door de parallelle schakeling krijgt elke weerstand 12v, dit is genoeg om alle aparatuur te laten draaien. 
 
 De stroboscopen en het verwarmingselement worden bediend door een mosfet in serie te plaatsen en de gate te verbinden met de Digital pins op de Arduino UNO.
 
@@ -29,10 +29,18 @@ Op deze manier kunnen we de stroboscoop en het verwarmingselement aan en uit doe
 Het verwarmingselement gaat automatisch aan of uit (hangt af van de input van de temperatuursensor).
 De stroboscopen kunnen manueel worden bediend met de numpad.
 
+Er is een TMP36(temperatuursensor) aangesloten met de analoge pin van de Arduino UNO die ons zal helpen de temperatuur te regelen (aan de hand van het peltier module dat geregeld kan worden door een mosfet) in de klimaatbox.
+
+De numpad word aangesloten aan de digital pins van de Arduino UNO, via een gedownloade library kan deze makkelijk bestuurd worden.
+
 ## Klimaatbox
-![Image of ClimateBox](Images/box.png)
+![Image of ClimateBox](Images/box.jpg)
 
 Alle draadjes zijn strak gesoldeerd, tape is gebruikt om de gaten af te sluiten en om de draden op hun plaats te houden.
+
+Het aanhechten van het houten bord (waarop de arduino en het board zijn geïnstalleerd) is gedaan aan de hand van superlijm.
+
+Het linkerbovengat dient als doorgang voor de TMP36 (deze ga ik op 1 juni installeren).
 ## Code
 (lees eerst de commentaren bij de code vooraleer je hieraan begint)
 
