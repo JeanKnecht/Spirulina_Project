@@ -11,7 +11,7 @@
 
 #include <Keypad.h> //library om numpad mee te kunnen besturen                                      
 
-const byte ROWS = 4; 
+const byte ROWS = 4;                    // hier volgen enkle settings die noodzakelijk zijn voor de library
 const byte COLS = 3; 
 
 char hexaKeys[ROWS][COLS] = {
@@ -26,7 +26,7 @@ byte colPins[COLS] = {12,11,10};
 
 Keypad keypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);   //functie van de library om keypad te maken
 
-//nu begint het echt werk
+//nu begint het echte werk
 //meeste variabelen worden uitgelegd in de code zelf
 
 String inputString;
@@ -59,7 +59,7 @@ void flikker_500(int trigger){
   
 }
 
-void changeTimeH(int x){
+void changeTimeH(int x){                    //functies om makkelijk bepaalde statements te veranderen, deze worden verder uitgelegd
    switch(x){
      case 2: timeState_2 = HIGH; break;
      case 3: timeState_3 = HIGH; break;
@@ -82,49 +82,49 @@ void changeTimeL(int x){
 void setup() {
 
   Serial.begin(9600);
-  pinMode(2, OUTPUT);
+  pinMode(2, OUTPUT);            //aan de digital pins van de stroboscopen worden geen variabel toegekend omdat het dan makkelijker is om deze pins te besturen
   pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
 
-  pinMode(warmte, OUTPUT);
+  pinMode(warmte, OUTPUT);      
   pinMode(temp, INPUT);
 }
 
 void loop() {
-  char key = keypad.getKey();
+  char key = keypad.getKey(); //kijkt wanneer er op de numpad is geduwd en zet de verkregen waarde in een variabel
 
-  if (key) {
+  if (key) {                  //wanneer er op een knop is geduwd is de if-statement True
     Serial.println(key);
 
-    if (key >= '0' && key <= '9') {     
+    if (key >= '0' && key <= '9') {     //is de key een numeriek getal tussen 0 en 9 dan wordt die toegevoegd aan een string 
       inputString += key;               
-    } else if (key == '#') {
-      if (inputString.length() > 0) {
+    } else if (key == '#') {            //wanneer de key gelijk is aan de hashtag zal het de string(dat bestaat uit getallen) omzetten naar een integer
+      if (inputString.length() > 0) {   //er moet zeker meer dan 1 keer gedrukt zijn anders is er geen input
         inputInt = inputString.toInt();
-        inputString = "";
-        readl = inputInt;
+        inputString = "";               //de inputString wordt weer leeggehaald, nu kan die weer nieuwe informatie opslaan
+        readl = inputInt;               //het bekomen integer wordt opgeslaan in een variabel dat later gebruikt wordt om de gegevens op te vragen
         Serial.println(readl);
-        pressState = HIGH;
+        pressState = HIGH;              //wanneer er gedrukt is en er een getal is opgeslagen in een variabel wordt deze statement True
         inputInt;
 
         
       }
-    } else if (key == '*') {
+    } else if (key == '*') {            //wanneer er op het * wordt gedrukt wordt alle informatie weggegooid
       inputString = "";                 
     }
   }
 
-  if(timeState_2 == HIGH){
-      digitalWrite(2, ledState);}
-  if(timeState_3 == HIGH){
+  if(timeState_2 == HIGH){                      //de timestate verwijst naar of de input al dan wel of niet alternerend licht vraagt
+      digitalWrite(2, ledState);}               //wanneer de timestate hoog is zal de fucntie telkens opnieuw in de loop gaan en het licht laten flikkeren op het bepaalde interval
+  if(timeState_3 == HIGH){                      //wanneer het licht aan of uit gaat hangt af van de ledState, deze wordt bepaald in de volgend blok
      digitalWrite(3, ledState);}
   if(timeState_4 == HIGH){
      digitalWrite(4, ledState);}
   if(timeState_5 == HIGH){
      digitalWrite(5, ledState);}
 
-  unsigned long currentMillis = millis();
+  unsigned long currentMillis = millis();           //dit wordt uitgelegd op de Github pagina
         
   if (currentMillis - previousMillis >= interval) {
         previousMillis = currentMillis;
@@ -138,14 +138,14 @@ void loop() {
       
   }
 
-  if(pressState == HIGH){
-      int soort_strobo = readl / 10;
-      int soort_tijd = readl % 10;
+  if(pressState == HIGH){                         //er is gedrukt geweest op de numpad en er moet dus een actie worden ondergaan
+      int soort_strobo = readl / 10;              //het verkregen variabel dat bestaat uit 2 cijfers wordt opgeslits in 2 cijfers
+      int soort_tijd = readl % 10;                //het eerste cijfer stelt de digital pin voor en het tweede cijfer het tijdsregime                 
 
-      if(soort_tijd == 1){
-       changeTimeL(soort_strobo);
-       uit(soort_strobo);
-       pressState = LOW;
+      if(soort_tijd == 1){                        //er wordt gekeken welk tijdsregime er gevraagd wordt
+       changeTimeL(soort_strobo);                 
+       uit(soort_strobo);                         //verwezen naar een functie die de led zal uitzetten, de functie vraagt naar welke digitale pin verwezen moet worden
+       pressState = LOW;                          //de actie is ondergaan en de pressState mag weer op low gezet worden totdat er een nieuwe variabel op de numpad wordt ingetoetst
         }
 
       if(soort_tijd == 2){
@@ -155,22 +155,22 @@ void loop() {
         }
 
       if(soort_tijd == 3){
-        changeTimeH(soort_strobo);
+        changeTimeH(soort_strobo);                //wanneer er alternerend licht wordt gevraagd zal eerst de timestate op True gezet worden
         pressState = LOW;
 }
 }
 
 
-  int reading = analogRead(temp);
-  float voltage = reading * 5.0;
+  int reading = analogRead(temp);                    //input van temperatuursensor wordt gelezen en opgeslagen in een variabel
+  float voltage = reading * 5.0;                     //omdat de input nog niet direct gelijk is aan de temperatuur in graden celsius moeten er enkele omvormingen gebeuren
   voltage /= 1024.0;
   float temperatureC = (voltage - 0.5) * 100 ;
 
-  Serial.println(temperatureC);
-  if(temperatureC < 32){
-    digitalWrite(warmte, HIGH);
+  Serial.println(temperatureC);                      //printen van de temperatuur in de seriële poort
+  if(temperatureC < 32){                             //wanneer de temperatuur kleiner is dan 32 graden zal de gate van de mosfet van het peltier module dicht gaan
+    digitalWrite(warmte, HIGH);       
     }
-  else{
+  else{                                              //wanneer de 32 graden overschreden zijn gaat de gate weer toe
     digitalWrite(warmte, LOW);
     }
 }
