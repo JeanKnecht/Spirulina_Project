@@ -5,7 +5,7 @@
   Sint Barbara college Steam project
 
   code dat gebruikt wordt om de klimaatbox op de juiste temperatuur te houden(warmte element en temperatuursensor),
-  om de beluchting te regelen(12v computer ventilator) en om de stroboscopen mee te bedienen aan de hand van een 3x3 numpad.
+  om de beluchting te regelen(12v computer ventilator) en om de stroboscopen mee te bedienen aan de hand van een 4x3 numpad.
 */
 
 
@@ -155,7 +155,7 @@ void loop() {
         }
 
       if(soort_tijd == 3){
-        changeTimeH(soort_strobo);                //wanneer er alternerend licht wordt gevraagd zal eerst de timestate op True gezet worden
+        changeTimeH(soort_strobo);                //wanneer er alternerend licht wordt gevraagd zal eerst de timestate op True gezet worden, hierdoor wordt tijdens het lopen de dgitale pin constant verwisseld van HIGH naar LOW volgens een bepaald interval
         pressState = LOW;
 }
 }
