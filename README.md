@@ -50,7 +50,7 @@ De ventilator blaast lucht uit de doos naar buiten, zo ontstaat er een drukversc
 
 De peltier module verwarmt de koelplaat, wanneer lucht wordt aangetrokken door de ventilator zal de lucht die door de koelplaat passeert opwarmen en deze warmte vervoeren naar de spirulina
 ## Code
-(lees eerst de commentaren bij de code vooraleer je hieraan begint)
+(lees eerst de commentaren bij de code vooraleer je hieraan begint. Bovenaan kan je de code openen)
 
 ### delay
 omdat het programma verschillende tijdsregimes bevat en omdat het constant input moet kunnen lezen is het gebruik van delay onmogelijk. Er is dus een andere manier nodig om dit op te lossen.
