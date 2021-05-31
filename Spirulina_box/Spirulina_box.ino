@@ -11,20 +11,20 @@
 
 #include <Keypad.h> //library om numpad mee te kunnen besturen                                      
 
-const int ROW_NUM = 4;  // numpad bevat 4 rijen
-const int COLUMN_NUM = 3; // numpad bevat 4 kolommen maar voor ons zijn enkel de eerste 3 nodig
+const byte ROWS = 4; 
+const byte COLS = 3; 
 
-char keys[ROW_NUM][COLUMN_NUM] = { //visualisatie van het numpad(is nodig voor de library...)
-  {'1','2','3'},
-  {'4','5','6'},
-  {'7','8','9'},
-  {'*','0','#'}
+char hexaKeys[ROWS][COLS] = {
+  {'#', '0', '*'},
+  {'9', '8', '7'},
+  {'6', '5', '4'},
+  {'3', '2', '1'}
 };
 
-byte pin_rows[ROW_NUM] = {13, 12, 11, 10};  //digital pins die overeenkomen met de pins van de numpad
-byte pin_column[COLUMN_NUM] = {9, 8, 7};   
+byte rowPins[ROWS] = {10, 9, 8, 7}; 
+byte colPins[COLS] = {13,12,11}; 
 
-Keypad keypad = Keypad( makeKeymap(keys), pin_rows, pin_column, ROW_NUM, COLUMN_NUM );  //functie van de library om keypad te maken
+Keypad keypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);   //functie van de library om keypad te maken
 
 //nu begint het echt werk
 //meeste variabelen worden uitgelegd in de code zelf
@@ -35,7 +35,7 @@ long inputInt;
 int pressState = LOW; 
 int temp= A0; //analog pin voor de temperatuursensor
 int ledState = LOW; 
-int warmte = 8; //pin om mosfet van het warmte element mee te besturen
+int warmte = 6; //pin om mosfet van het warmte element mee te besturen
 int readl;  
 unsigned long previousMillis = 0; 
 
@@ -106,7 +106,7 @@ void loop() {
         readl = inputInt;
         Serial.println(readl);
         pressState = HIGH;
-        inputInt = "";
+        inputInt;
 
         
       }
@@ -166,7 +166,7 @@ void loop() {
   voltage /= 1024.0;
   float temperatureC = (voltage - 0.5) * 100 ;
 
-
+  Serial.println(temperatureC);
   if(temperatureC < 32){
     digitalWrite(warmte, HIGH);
     }
