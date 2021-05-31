@@ -81,11 +81,11 @@ Om de delay te omzeilen wordt de interne klok van de arduino gebruikt die meet h
 Eerst worden er 2 variablen gemaakt: previousMillis en interval.
 - Interval: variabel dat bijhoudt hoeveel ms er moeten gepasseerd zijn opdat de if-statement True is. Dit is ook gelijk aan het interval van de stroboscopen.
 
-- previousMillis: variabel dat gerbuikt wordt om wanneer het interval is beschreden, de tijd op een soort van manier te resetten. Natuurlijk gebeurt dit resetten niet echt maar relatief gezien kunnen we het wel zo gebruiken.
+- previousMillis: variabel dat gerbuikt wordt om wanneer het interval is verschreden, de tijd op een soort van manier te resetten. Natuurlijk gebeurt dit resetten niet echt maar relatief gezien kunnen we het wel zo gebruiken.
 
 Na het interval wordt de currentMillis gelijk gesteld aan de previousMillis, op deze manier reset je de klok.
 Bijvoorbeeld:
 
-op tijdstip t = 100ms is het interval beschreden, previousMillis wordt gelijk gesteld aan 100ms. Wanneer t = 200ms is 200ms - previousMillis opnieuw 100ms. Het interval is opnieuw beschreden.
+op tijdstip t = 100ms is het interval beschreden, previousMillis wordt gelijk gesteld aan 100ms. Wanneer t = 200ms is 200ms - previousMillis opnieuw 100ms. Het interval is opnieuw verschreden.
 
 Vervolgens wordt de ledstate oftewel HIGH of LOW gezet (tegenovergesteld van vorige) en krijgen de stroboscopen zo afwisselend 5v en 0v.
