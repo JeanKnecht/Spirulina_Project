@@ -31,7 +31,7 @@ De stroboscopen kunnen manueel worden bediend met de numpad.
 
 Er is een TMP36(temperatuursensor) aangesloten met de analoge pin van de Arduino UNO die ons zal helpen de temperatuur te regelen (aan de hand van het peltier module dat geregeld kan worden door een mosfet) in de klimaatbox.
 
-De numpad word aangesloten aan de digital pins van de Arduino UNO, via een gedownloade library kan deze makkelijk bestuurd worden. De digital pins worden door de library als oftewel HIGH of LOW gezet. Zo kan er een circuit nagebootst worden waarbij LOW als GND diend en HIGH als VCC, wanneer een knopje wordt ingeduwd sluit het circuit en krijgt de arduino een signaal.
+De numpad word aangesloten aan de digital pins van de Arduino UNO, via een gedownloade library kan deze makkelijk bestuurd worden. De digital pins worden door de library als oftewel HIGH of LOW gezet. Zo kan er een circuit nagebootst worden waarbij LOW als GND dient en HIGH als VCC, wanneer een knopje wordt ingeduwd sluit het circuit en krijgt de arduino een signaal.
 
 ## Klimaatbox
 ![Image of ClimateBox](Images/box.jpg)
@@ -42,13 +42,13 @@ Het aanhechten van het houten bord (waarop de arduino en het board zijn geïnsta
 
 Het linkerbovengat dient als doorgang voor de TMP36 (deze ga ik op 1 juni installeren).
 
-De numpad werd eerst op een kartonnen vierkante geplakt(met tape) en vervolgens met superlijm op de box geplaatst.
+De numpad werd eerst op een kartonnen vierkant geplakt(met tape) en vervolgens met superlijm op de box geplaatst.
 
 Aan de rechterzijkant is de 12v ventilator geïnstalleerd, dit is gedaan door een gat te maken in de doos om vervolgens de ventilator in het gat vast te zetten. Hetzelfde geldt voor de peltier module die eerst op een koelplaat is aangehecht om vervolgens in de wand van de doos geplaatste te worden.
 
 De ventilator blaast lucht uit de doos naar buiten, zo ontstaat er een drukverschil waardoor er lucht van de andere kant wordt aangetrokken.
 
-De peltier module verwarmt de koelplaat, wanneer lucht wordt aangetrokken door de ventilator zal de lucht die door de koelplaat passeert opwarmen.
+De peltier module verwarmt de koelplaat, wanneer lucht wordt aangetrokken door de ventilator zal de lucht die door de koelplaat passeert opwarmen en deze warmte vervoeren naar de spirulina
 ## Code
 (lees eerst de commentaren bij de code vooraleer je hieraan begint)
 
