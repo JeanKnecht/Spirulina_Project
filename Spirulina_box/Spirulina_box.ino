@@ -21,8 +21,8 @@ char hexaKeys[ROWS][COLS] = {
   {'3', '2', '1'}
 };
 
-byte rowPins[ROWS] = {10, 9, 8, 7}; 
-byte colPins[COLS] = {13,12,11}; 
+byte rowPins[ROWS] = {9, 8, 7, 6}; 
+byte colPins[COLS] = {12,11,10}; 
 
 Keypad keypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);   //functie van de library om keypad te maken
 
