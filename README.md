@@ -6,22 +6,19 @@ Deze code bestuurt een klimaatbox dat wordt gebruikt voor het groeien van Spirul
 
 
 ## Technisch circuit
-![Image of Circuit](Images/Schematic_SpirulinaBox_2021-05-30.png)
+![Image of Circuit](Images/Schematic_SpirulinaBox_2021-05-31.png)
 
 
 Materialen
-  - 4 x 10W stroboscopen
+  - 4 x 12v stroboscopen
   - 5 x MOSFET's
   - 12v computerventilator
-  - Verwarmingselement
+  - 12v peltier module
   - Numpad
   - TMP36
   - Arduino UNO
-  - Weerstanden (In deze opstelling 4 x 1k ohm en 1 x 0.8k ohm)
 
-De stroboscoop, ventilator en verwarmingselement zijn parallel geschakelt. Er wordt 20 volt DC toegediend, bij de strobosopen wordt er telkens een weerstand in serie geplaats om ervoor te zorgen dat het potentiaalverschil over de stroboscopen 10v is.
-Dit geldt ook voor de ventilator die 12V nodig heeft.
-Het verwarmingselement krijgt 20V en heeft dus geen weerstand nodig.
+De stroboscoop, ventilator en verwarmingselement zijn parallel geschakelt. Er wordt 12 volt DC toegediend, dit is genoeg om alle aparatuur te laten draaien.
 
 De stroboscopen en het verwarmingselement worden bediend door een mosfet in serie te plaatsen en de gate te verbinden met de Digital pins op de Arduino UNO.
 
@@ -32,6 +29,10 @@ Op deze manier kunnen we de stroboscoop en het verwarmingselement aan en uit doe
 Het verwarmingselement gaat automatisch aan of uit (hangt af van de input van de temperatuursensor).
 De stroboscopen kunnen manueel worden bediend met de numpad.
 
+## Klimaatbox
+![Image of ClimateBox](Images/box.png)
+
+Alle draadjes zijn strak gesoldeerd, tape is gebruikt om de gaten af te sluiten en om de draden op hun plaats te houden.
 ## Code
 (lees eerst de commentaren bij de code vooraleer je hieraan begint)
 
