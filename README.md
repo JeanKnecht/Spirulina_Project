@@ -2,7 +2,7 @@
 
 ## Intro
 
-Deze code bestuurt een klimaatbox dat wordt gebruikt voor het groeien van Spirulina. Temperatuur en beluchting gebeuren automatisch en de stroboscopen worden bediend aan de hand van een 4x3 numpad.
+Deze code bestuurt een klimaatbox dat wordt gebruikt voor het groeien van Spirulina. Temperatuur en beluchting gebeuren automatisch en de stroboscopen worden bediend aan de hand van een 4x3 numpad. Ook het interval van het alternerend licht kan aangepast worden met de numpad.
 
 
 ## Technisch circuit
