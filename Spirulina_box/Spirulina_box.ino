@@ -32,16 +32,18 @@ Keypad keypad = Keypad(makeKeymap(hexaKeys), rowPins, colPins, ROWS, COLS);   //
 String inputString;
 long inputInt;
 
+int heatState = LOW;
+int heat = LOW;
 int pressState = LOW; 
 int temp= A0; //analog pin voor de temperatuursensor
 int ledState = LOW; 
-int warmte = 6; //pin om mosfet van het warmte element mee te besturen
+int warmte = 13; //pin om mosfet van het warmte element mee te besturen
 int readl;  
 unsigned long previousMillis = 0; 
-
+unsigned long previousMillis2 = 0; 
 
 const long interval = 100; //interval van het alternerend licht
-
+const long heatInterval = 200;
 int timeState_2 = LOW;  
 int timeState_3 = LOW;
 int timeState_4 = LOW;
@@ -124,7 +126,12 @@ void loop() {
   if(timeState_5 == HIGH){
      digitalWrite(5, ledState);}
 
-  unsigned long currentMillis = millis();           //dit wordt uitgelegd op de Github pagina
+  if(heatState == HIGH){
+     //Serial.println("heat aan/uit");
+     digitalWrite(warmte, heat);}
+     
+  unsigned long currentMillis = millis();
+  unsigned long currentMillis2 = millis(); //dit wordt uitgelegd op de Github pagina
         
   if (currentMillis - previousMillis >= interval) {
         previousMillis = currentMillis;
@@ -133,6 +140,18 @@ void loop() {
          ledState = HIGH;}
         else{
           ledState = LOW;
+          }
+
+      
+  }
+
+  if (currentMillis2 - previousMillis2 >= heatInterval) {
+        previousMillis2 = currentMillis2;
+
+        if (heat == LOW){
+         heat = HIGH;}
+        else{
+          heat = LOW;
           }
 
       
@@ -168,9 +187,9 @@ void loop() {
 
   Serial.println(temperatureC);                      //printen van de temperatuur in de seriële poort
   if(temperatureC < 32){                             //wanneer de temperatuur kleiner is dan 32 graden zal de gate van de mosfet van het peltier module dicht gaan
-    digitalWrite(warmte, HIGH);       
+    heatState = HIGH;       
     }
   else{                                              //wanneer de 32 graden overschreden zijn gaat de gate weer toe
-    digitalWrite(warmte, LOW);
+    heatState = LOW;
     }
 }
