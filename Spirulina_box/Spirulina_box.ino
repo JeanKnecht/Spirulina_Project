@@ -42,7 +42,7 @@ int readl;
 unsigned long previousMillis = 0; 
 unsigned long previousMillis2 = 0; 
 
-const long interval = 100; //interval van het alternerend licht
+long interval = 500;          //interval van het alternerend licht
 const long heatInterval = 200;
 int timeState_2 = LOW;  
 int timeState_3 = LOW;
@@ -89,6 +89,11 @@ void setup() {
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
 
+  digitalWrite(2, HIGH);
+  digitalWrite(3, HIGH);
+  digitalWrite(4, HIGH);
+  digitalWrite(5, HIGH);
+
   pinMode(warmte, OUTPUT);      
   pinMode(temp, INPUT);
 }
@@ -112,8 +117,13 @@ void loop() {
 
         
       }
-    } else if (key == '*') {            //wanneer er op het * wordt gedrukt wordt alle informatie weggegooid
-      inputString = "";                 
+    } else if (key == '*') {  //wanneer er op het * wordt, wordt het interval van het alternerend licht aangepast met het gegeven nummer
+         if (inputString.length() > 0) {
+            inputInt = inputString.toInt();
+            inputString = "";
+            interval = inputInt;
+            inputInt;
+         }
     }
   }
 
@@ -187,9 +197,9 @@ void loop() {
 
   Serial.println(temperatureC);                      //printen van de temperatuur in de seriële poort
   if(temperatureC < 32){                             //wanneer de temperatuur kleiner is dan 32 graden zal de gate van de mosfet van het peltier module dicht gaan
-    heatState = HIGH;       
+    digitalWrite(warmte, HIGH);       
     }
   else{                                              //wanneer de 32 graden overschreden zijn gaat de gate weer toe
-    heatState = LOW;
+    digitalWrite(warmte, LOW);
     }
 }
