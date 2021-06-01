@@ -107,7 +107,7 @@ void loop() {
     if (key >= '0' && key <= '9') {     //is de key een numeriek getal tussen 0 en 9 dan wordt die toegevoegd aan een string 
       inputString += key;               
     } else if (key == '#') {            //wanneer de key gelijk is aan de hashtag zal het de string(dat bestaat uit getallen) omzetten naar een integer
-      if (inputString.length() > 0) {   //er moet zeker meer dan 1 keer gedrukt zijn anders is er geen input
+      if (inputString.length() > 0 and inputString.length() < 3) {   //er moet zeker meer dan 1 keer gedrukt zijn anders is er geen input
         inputInt = inputString.toInt();
         inputString = "";               //de inputString wordt weer leeggehaald, nu kan die weer nieuwe informatie opslaan
         readl = inputInt;               //het bekomen integer wordt opgeslaan in een variabel dat later gebruikt wordt om de de mosfets te reguleren
@@ -117,7 +117,11 @@ void loop() {
 
         
       }
-    } else if (key == '*') {  //wanneer er op het * wordt, wordt het interval van het alternerend licht aangepast met het gegeven nummer
+     else{
+        inputString = "";
+      }
+    }
+    if (key == '*') {  //wanneer er op het * wordt, wordt het interval van het alternerend licht aangepast met het gegeven nummer
          if (inputString.length() > 0) {
             inputInt = inputString.toInt();
             inputString = "";
