@@ -49,6 +49,8 @@ int timeState_3 = LOW;
 int timeState_4 = LOW;
 int timeState_5 = LOW;
 
+int regulateFan = A5;
+
 void aan(int trigger){                        //3 functies voor telkens 1 tijdsregime(aan, uit en alternerend)
   digitalWrite(trigger, HIGH);
 }
@@ -96,6 +98,9 @@ void setup() {
 
   pinMode(warmte, OUTPUT);      
   pinMode(temp, INPUT);
+
+  pinMode(regulateFan, OUTPUT);
+  analogWrite(regulateFan,0);
 }
 
 void loop() {
@@ -202,8 +207,7 @@ void loop() {
   Serial.println(temperatureC);                      //printen van de temperatuur in de seriële poort
   if(temperatureC < 32){                             //wanneer de temperatuur kleiner is dan 32 graden zal de gate van de mosfet van het peltier module dicht gaan
     digitalWrite(warmte, HIGH);       
+    }else if(temperatureC> 35){
+      digitalWrite(warmte, LOW);
     }
-  else{                                              //wanneer de 32 graden overschreden zijn gaat de gate weer toe
-    digitalWrite(warmte, LOW);
-    }
-}
+} 
